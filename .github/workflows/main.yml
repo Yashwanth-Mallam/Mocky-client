@@ -25,9 +25,6 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Export static site
-        run: npm run export
-
       - name: Upload static build to EC2
         uses: easingthemes/ssh-deploy@v4
         env:
