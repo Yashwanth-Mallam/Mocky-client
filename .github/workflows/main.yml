@@ -11,18 +11,22 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
+          cache: npm
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build project
         run: npm run build
+
+      - name: Export static site
+        run: npm run export
 
       - name: Upload static build to EC2
         uses: easingthemes/ssh-deploy@v4
@@ -40,6 +44,5 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            sudo yum install -y httpd
             sudo systemctl enable httpd
             sudo systemctl restart httpd
