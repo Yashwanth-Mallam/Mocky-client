@@ -69,7 +69,7 @@ export default function LandingPage() {
           </Badge>
 
           <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-6">
-            Master Your Next Interview with Mockyy
+            Master Your Next Interview with AI.
           </h1>
 
           <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
