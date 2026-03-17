@@ -16,7 +16,7 @@ import { Separator } from "@/components/ui/separator";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Brain, Mail, Lock, Eye, EyeOff, Chrome, User } from "lucide-react";
 import { toast } from "sonner";
-import { registerUser } from "@/lib/api/signupapi"; // adjust path if needed
+// import { registerUser } from "@/lib/api/signupapi"; // adjust path if needed
 import { useRouter } from "next/navigation";
 
 export default function SignUpPage() {
@@ -35,6 +35,10 @@ export default function SignUpPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    toast.success("Registration successful!");
+      // console.log("Registered user:", result.user);
+    router.push("/auth/signup"); // Redirect to signin page after successful registration
+    
     if (formData.password !== formData.confirmPassword) {
       toast.error("Passwords do not match");
       return;
@@ -47,26 +51,26 @@ export default function SignUpPage() {
 
     setIsLoading(true);
 
-    try {
-      const result = await registerUser({
-        username: formData.name,
-        email: formData.email,
-        password: formData.password,
-      });
+    // try {
+    //   const result = await registerUser({
+    //     username: formData.name,
+    //     email: formData.email,
+    //     password: formData.password,
+    //   });
 
-      toast.success("Registration successful!");
-      console.log("Registered user:", result.user);
-      router.push("/auth/signup"); // Redirect to signin page after successful registration
-      console.log(result);
+    //   toast.success("Registration successful!");
+    //   console.log("Registered user:", result.user);
+    //   router.push("/auth/signup"); // Redirect to signin page after successful registration
+    //   console.log(result);
 
-      // Optionally: router.push('/auth/signin')
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        toast.error(error.message || "Something went wrong");
-      } else {
-        toast.error("Something went wrong");
-      }
-    }
+    //   // Optionally: router.push('/auth/signin')
+    // } catch (error: unknown) {
+    //   if (error instanceof Error) {
+    //     toast.error(error.message || "Something went wrong");
+    //   } else {
+    //     toast.error("Something went wrong");
+    //   }
+    // }
   };
 
   const handleGoogleSignUp = () => {

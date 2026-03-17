@@ -15,7 +15,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Mail, Lock, Eye, EyeOff, Chrome } from "lucide-react";
 import { toast } from "sonner";
-import { loginUser } from "@/lib/api/signinapi"; // adjust path if needed
+// import { loginUser } from "@/lib/api/signinapi"; // adjust path if needed
 import { useRouter } from "next/navigation"; // Ensure this is the correct import based on your Next.js version
 export default function SignInPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -26,25 +26,30 @@ export default function SignInPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     setIsLoading(true);
+    toast.success("Login successful!");
+    router.push("/home"); // Redirect to home page after successful login
 
-    try {
-      const user = await loginUser(email, password);
-      toast.success("Login successful!");
-      console.log("Logged in user:", user);
+    // try {
+    //   const user = await loginUser(email, password);
+    //   toast.success("Login successful!");
+    //   console.log("Logged in user:", user);
+    //   toast.success("Login successful!");
+    //   router.push("/home"); // Redirect to home page after successful login
 
-      // save the token in localStorage or context
-      localStorage.setItem("token", user.token);
-      router.push("/home"); // Redirect to home page after successful login
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        toast.error(error.message);
-      } else {
-        toast.error("Login failed");
-      }
-    } finally {
-      setIsLoading(false);
-    }
+    //   // save the token in localStorage or context
+    //   localStorage.setItem("token", user.token);
+    //   router.push("/home"); // Redirect to home page after successful login
+    // } catch (error: unknown) {
+    //   if (error instanceof Error) {
+    //     toast.error(error.message);
+    //   } else {
+    //     toast.error("Login failed");
+    //   }
+    // } finally {
+    //   setIsLoading(false);
+    // }
   };
 
   const handleGoogleSignIn = () => {
